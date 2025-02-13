@@ -1,0 +1,1 @@
+ALTER TABLE "capsules" ADD COLUMN "created_at" date DEFAULT now();
