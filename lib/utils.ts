@@ -46,7 +46,7 @@ export const countdownTimer = (endDate: string): string => {
   const end = new Date(endDate).getTime();
   const now = new Date().getTime();
 
-  if (end <= now) return "Countdown expired";
+  if (end <= now) return "UNLOCKED";
 
   const diff = end - now;
 

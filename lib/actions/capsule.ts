@@ -173,8 +173,6 @@ export const getCapsules = async (email: any) => {
         const result = await db
             .select()
             .from(capsules)
-            .where(eq(capsules.status, "LOCKED")) // Example: Filter locked capsules
-            .orderBy(capsules.endDate); // Sort by endDate
 
         return result;
     } catch (error) {
