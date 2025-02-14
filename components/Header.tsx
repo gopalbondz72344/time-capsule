@@ -46,7 +46,7 @@ const Header = ({ session }: { session: Session | null }) => {
                 className="md:hidden  focus:outline-none transition-all duration-300"
                 onClick={() => setIsOpen(true)}
             >
-                <Menu size={30} color="white" />
+                <Menu size={30} color="white"  />
             </button>
 
             {/* Sidebar Navigation (Mobile) */}
@@ -60,7 +60,7 @@ const Header = ({ session }: { session: Session | null }) => {
                     className="absolute top-4 right-4 text-white"
                     onClick={() => setIsOpen(false)}
                 >
-                    <X size={30} />
+                    <div className="w-36 h-36">X</div>
                 </button>
 
                 {/* Sidebar Links */}
