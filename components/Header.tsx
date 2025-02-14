@@ -15,7 +15,7 @@ const Header = ({ session }: { session: Session | null }) => {
         <header className="mt-10 px-8 py-3  flex justify-between items-center gap-5">
             {/* Logo */}
             <Link href="/" className="flex">
-                <Image src="/logo.png" alt="logo" width={200} height={50} priority loading="lazy" />
+                <Image src="/logo.png" alt="logo" width={200} height={50} priority />
             </Link>
 
             {/* Desktop Navigation */}
