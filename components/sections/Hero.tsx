@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import React from "react";
 
-const Hero = () => {
+const Hero: React.FC = () => {
     return (
         <div id="hero" className="relative min-h-screen">
             {/* Background Video */}
@@ -12,6 +13,7 @@ const Hero = () => {
                 loop
                 autoPlay
                 playsInline // Ensures it works on mobile
+                preload="auto"
             />
 
             {/* Black Transparent Overlay */}
