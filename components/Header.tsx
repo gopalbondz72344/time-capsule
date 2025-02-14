@@ -68,8 +68,9 @@ const Header = ({ session }: { session: Session | null }) => {
                     {session ? (
                         <Link href="/my-profile" onClick={() => setIsOpen(false)}>
                             <Avatar>
-                                <AvatarFallback className="bg-blue-500 w-[200px] h-[200px]text-white font-bold">
+                                <AvatarFallback className="bg-blue-500 w-[200px] h-[200px] text-white font-bold">
                                     {getInitials(session?.user?.name || "IN")}
+                                    My-Profile
                                 </AvatarFallback>
                             </Avatar>
                         </Link>
