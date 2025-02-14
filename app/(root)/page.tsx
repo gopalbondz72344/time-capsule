@@ -32,15 +32,19 @@ export default async function Home() {
 
             {/* Capsules Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 min-h-screen bg-dark-300 p-6 text-white">
-                <div className="bg-dark-800 p-4 rounded-lg shadow-md overflow-auto">
+                {/* Locked Capsules */}
+                <div className="bg-dark-800 p-4 rounded-lg shadow-md overflow-y-auto max-h-[80vh]">
                     <h2 className="text-xl font-semibold mb-4 text-center">Locked Capsules</h2>
                     <LockedCapsuleList capsules={updatedLockedCapsules} />
                 </div>
-                <div className="bg-dark-800 p-4 rounded-lg shadow-md overflow-auto">
+
+                {/* Unlocked Capsules */}
+                <div className="bg-dark-800 p-4 rounded-lg shadow-md overflow-y-auto max-h-[80vh]">
                     <h2 className="text-xl font-semibold mb-4 text-center">Unlocked Capsules</h2>
                     <UnLockedCapsuleList capsules={updatedUnlockedCapsules} />
                 </div>
             </div>
         </>
+
     );
 }
