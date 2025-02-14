@@ -7,6 +7,7 @@ export interface AuthCredentials {
 
 export interface CreateCapsule {
     name: string;
+    userEmail: string;
     endDate: string;
     ImageUpload?: string[];  // Optional, to handle cases where file uploads might not be provided
     VideoUpload?: string[];

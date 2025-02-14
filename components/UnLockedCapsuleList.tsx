@@ -6,13 +6,13 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { countdownTimer } from "@/lib/utils"; // Import the countdown timer
 
-export default function CapsuleList({ capsules }: { capsules: any[] }) {
-    const [updatedCapsules, setUpdatedCapsules] = useState<any[]>(capsules);
+export default function UnLockedCapsuleList({ capsules }: { capsules: any[] }) {
+    const [Capsules, setCapsules] = useState<any[]>(capsules);
 
     // Handle countdown updates every second
     useEffect(() => {
         const interval = setInterval(() => {
-            setUpdatedCapsules(prevCapsules => {
+            setCapsules(prevCapsules => {
                 return prevCapsules.map(capsule => ({
                     ...capsule,
                     countdown: countdownTimer(capsule.endDate), // Update countdown every second
@@ -24,13 +24,9 @@ export default function CapsuleList({ capsules }: { capsules: any[] }) {
     }, [capsules]); // Re-run effect when capsules data changes
     return (
         <div className="capsule-list-container">
-            <div className="capsule-list-title flex justify-between items-center">
-                <h3 className="text-28-semibold">All Capsules</h3>
-                <AddCapsuleBtn />
-            </div>
             <ul className="capsule-ul">
-                {updatedCapsules.length > 0 ? (
-                    updatedCapsules.map(({ id, name, createdDate, countdown }: any) => (
+                {Capsules.length > 0 ? (
+                    Capsules.map(({ id, name, createdDate, countdown }: any) => (
                         <li key={id} className="capsule-list-item">
                             <Link href={`/capsules?id=${id}`} className="flex flex-1 items-center gap-4">
                                 <div className="rounded-md bg-dark-500 p-2 sm:block">

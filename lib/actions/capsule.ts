@@ -6,6 +6,7 @@ import { capsules } from "@/database/schema";
 import fuzzy from "fuzzy";
 import {CreateCapsule, Riddle} from "@/type";
 import config from "@/lib/config";
+import {auth} from "@/auth";
 
 // function to unlock the capsules on the endDate
 const unlockCapsules = async () => {
@@ -128,32 +129,43 @@ export const checkAnswer = async (id: string, userAnswer: string) => {
 // Function to create a new capsule
 export const createCapsule = async (params: CreateCapsule) => {
     try {
+        const session = await auth();
+        const email = session?.user?.email;
+
+        if (!email) {
+            return {
+                success: false,
+                message: "User is not authenticated",
+            };
+        }
+
         const endDate = params.endDate ? new Date(params.endDate).toISOString() : new Date().toISOString();
         const createdAt = new Date().toISOString(); // Get current date/time
 
-        // Ensure that fileUpload is an empty array if not provided
-        const ImageUpload = params.ImageUpload || [];
-        const VideoUpload = params.VideoUpload || [];
+        const ImageUpload = Array.isArray(params.ImageUpload) ? params.ImageUpload : [];
+        const VideoUpload = Array.isArray(params.VideoUpload) ? params.VideoUpload : [];
         const riddles = await fetchRiddles(5);
-        const newCapsule = await db
+
+        const [newCapsule] = await db
             .insert(capsules)
             .values({
                 name: params.name,
-                endDate: endDate,
-                createdAt: createdAt, // Store createdAt timestamp
+                userEmail: email, // Ensure correct column name
+                endDate,
+                createdAt,
                 status: "LOCKED", // New capsules start as LOCKED
-                ImageUpload: ImageUpload, // Ensure ImageUpload is passed as an array
-                VideoUpload: VideoUpload,// Ensure VideoUpload is passed as an array
-                riddles: riddles
+                ImageUpload: JSON.stringify(ImageUpload), // Store as JSON
+                VideoUpload: JSON.stringify(VideoUpload), // Store as JSON
+                riddles: JSON.stringify(riddles), // Store as JSON
             })
-            .returning();
+            .returning(); // Return all fields
 
         return {
             success: true,
-            data: JSON.parse(JSON.stringify(newCapsule[0])),
+            data: newCapsule,
         };
     } catch (error) {
-        console.error(error);
+        console.error("Error creating capsule:", error);
         return {
             success: false,
             message: "An error occurred while creating the capsule",
@@ -162,22 +174,41 @@ export const createCapsule = async (params: CreateCapsule) => {
 };
 
 // Function for getting capsules of that particular user using email
-export const getCapsules = async (email: any) => {
+export const getLockedCapsules = async (email: string) => {
     try {
-        // Validate if the email exists in the params
         if (!email) {
             throw new Error("Unauthorized: No email provided.");
         }
 
-        // Fetch all capsules filtered by email and status
         const result = await db
             .select()
             .from(capsules)
+            .where(and(eq(capsules.status, "LOCKED"), eq(capsules.userEmail, email))) // Filter by status and user email
+            .orderBy(capsules.endDate);
 
         return result;
     } catch (error) {
-        console.error("Error fetching capsules:", error);
-        throw new Error("Failed to retrieve capsules.");
+        console.error("Error fetching locked capsules:", error);
+        throw new Error("Failed to retrieve locked capsules.");
+    }
+};
+
+export const getUnLockedCapsules = async (email: string) => {
+    try {
+        if (!email) {
+            throw new Error("Unauthorized: No email provided.");
+        }
+
+        const result = await db
+            .select()
+            .from(capsules)
+            .where(and(eq(capsules.status, "UNLOCKED"), eq(capsules.userEmail, email))) // Filter by status and user email
+            .orderBy(capsules.endDate);
+
+        return result;
+    } catch (error) {
+        console.error("Error fetching unlocked capsules:", error);
+        throw new Error("Failed to retrieve unlocked capsules.");
     }
 };
 

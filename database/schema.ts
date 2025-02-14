@@ -28,6 +28,7 @@ export const users = pgTable("users", {
 export const capsules = pgTable("capsules", {
     id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
     name: varchar("name", { length: 255 }).notNull(),
+    userEmail: text("user_email").notNull().references(() => users.email, { onDelete: "cascade" }),
     createdAt: date("created_at").defaultNow(),
     endDate: date("end_at").defaultNow(),
     ImageUpload: json("images").notNull(), // Use JSON for storing an array of file IDs
