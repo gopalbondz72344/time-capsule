@@ -66,7 +66,7 @@ const Header = ({ session }: { session: Session | null }) => {
                 {/* Sidebar Links */}
                 <nav className="flex flex-col items-start mt-16 pl-6 space-y-4">
                     {session ? (
-                        <Link href="/my-profile" className="text-white text-lg py-2 px-4 hover:bg-blue-600 rounded-lg w-full transition-all" onClick={() => setIsOpen(false)}>
+                        <Link href="/my-profile" className="text-white hover:bg-blue-600" onClick={() => setIsOpen(false)}>
                             <Avatar>
                                 <AvatarFallback className="bg-blue-500 w-[200px] h-[200px] text-white font-bold">
                                     {getInitials(session?.user?.name || "IN")}
