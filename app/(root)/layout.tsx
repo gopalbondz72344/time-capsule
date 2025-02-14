@@ -1,3 +1,4 @@
+"use server"
 import React, { ReactNode } from "react";
 import Header from "@/components/Header";
 import { auth } from "@/auth";
@@ -19,6 +20,8 @@ const Layout = async ({ children }: { children: ReactNode }) => {
             .from(users)
             .where(eq(users.id, session?.user?.id))
             .limit(1);
+
+        if (!user.length) return; // Ensure user exists before accessing properties
 
         if (user[0].lastActivityDate === new Date().toISOString().slice(0, 10))
             return;

@@ -33,12 +33,10 @@ export default function CapsuleTabs({ lockedCapsules, unlockedCapsules }: any) {
             <div className="mt-6 p-4 bg-dark-800 rounded-lg shadow-md overflow-y-auto max-h-[80vh]">
                 {activeTab === "locked" ? (
                     <>
-                        <h2 className="text-xl font-semibold mb-4 text-center">Locked Capsules</h2>
                         <LockedCapsuleList capsules={lockedCapsules} />
                     </>
                 ) : (
                     <>
-                        <h2 className="text-xl font-semibold mb-4 text-center">Unlocked Capsules</h2>
                         <UnLockedCapsuleList capsules={unlockedCapsules} />
                     </>
                 )}

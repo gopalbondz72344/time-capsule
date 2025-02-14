@@ -6,10 +6,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { getInitials } from "@/lib/utils";
 import Image from "next/image";
 import { navLinks } from "@/constants";
-import { Session } from "next-auth";
-import { Menu, X } from "lucide-react"; // Icons for menu and close
 
-const Header = ({ session }: { session: Session | null }) => {
+const Header = ({ session }: { session: any | null }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <header className="mt-10 px-8 py-3  flex justify-between items-center gap-5">
@@ -21,12 +19,13 @@ const Header = ({ session }: { session: Session | null }) => {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex gap-10">
                 {session ? (
-                    <Link href="/my-profile" className="text-white">
+                    <Link href="/my-profile" className="text-white flex justify-center items-center gap-2">
                         <Avatar>
                             <AvatarFallback className="bg-blue-500 text-white font-bold">
                                 {getInitials(session?.user?.name || "IN")}
                             </AvatarFallback>
                         </Avatar>
+                        My Profile
                     </Link>
                 ) : (
                     navLinks.map((link) => (
@@ -66,14 +65,17 @@ const Header = ({ session }: { session: Session | null }) => {
                 {/* Sidebar Links */}
                 <nav className="flex flex-col items-start mt-16 pl-6 space-y-4">
                     {session ? (
-                        <Link href="/my-profile" className="text-white"  onClick={() => setIsOpen(false)}>
+                        <>
+                        <Link href="/my-profile" className="text-white flex justify-center items-center gap-2"  onClick={() => setIsOpen(false)}>
                             <Avatar>
-                                <AvatarFallback className="bg-blue-500 w-[200px] h-[200px] text-white font-bold">
+                                <AvatarFallback className="bg-blue-500 text-white font-bold">
                                     {getInitials(session?.user?.name || "IN")}
                                 </AvatarFallback>
                             </Avatar>
-                            My-Profile
+                            My Profile
                         </Link>
+                        <h1 className="text-white font-bold">Hello {session?.user?.name}</h1>
+                        </>
                     ) : (
 
                         navLinks.map((link) => (

@@ -82,10 +82,10 @@ const ViewCapsule = ({ id }: CapsuleProps) => {
 
     return (
         <ImageKitProvider publicKey={publicKey} urlEndpoint={urlEndpoint} authenticator={authenticator}>
-            <div className="relative max-w-4xl mx-auto p-6 bg-gray-900 rounded-lg shadow-lg">
+              <div className={`relative max-w-4xl mx-auto p-6  ${isBackdropVisible ? "" : "bg-dark-100 mt-5"} rounded-lg `}>
                 {/* Full-page Backdrop Overlay */}
                 {isBackdropVisible && (
-                    <div className="absolute inset-0 bg-black bg-opacity-60 flex justify-center items-center text-center text-white p-8">
+                    <div className="absolute inset-0 mt-[200px]  bg-opacity-60 flex justify-center items-center text-center text-white p-8">
                         <div>
                             <h2 className="text-4xl font-extrabold mb-4">This Capsule "{capsule.name}" is locked until</h2>
                             <p className="text-2xl mb-6">{timeRemaining}</p>
@@ -101,10 +101,10 @@ const ViewCapsule = ({ id }: CapsuleProps) => {
                 {!isBackdropVisible && (
                     <>
                         {/* Capsule Info */}
-                        <h1 className="text-4xl font-extrabold text-white">{capsule.name}</h1>
+                        <h1 className="text-xl sm:text-2xl md:text-4xl font-extrabold text-white">"{capsule.name}" Capsule</h1>
 
                         {/* Images Section */}
-                        <h2 className="mt-12 text-3xl font-semibold text-white">Images</h2>
+                        <h2 className="mt-12 text-xl sm:text-2xl md:text-4xl   font-semibold text-white">Images</h2>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-6">
                             {images
                                 .filter((image: string) => image.startsWith("/capsules/images/"))
@@ -132,7 +132,7 @@ const ViewCapsule = ({ id }: CapsuleProps) => {
                         </div>
 
                         {/* Videos Section */}
-                        <h2 className="mt-14 text-3xl font-semibold text-white">Videos</h2>
+                        <h2 className="mt-14 text-xl sm:text-2xl md:text-4xl font-semibold text-white">Videos</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
                             {videos
                                 .filter((video: string) => video.startsWith("/capsules/videos/"))
