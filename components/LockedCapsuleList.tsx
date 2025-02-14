@@ -24,9 +24,6 @@ export default function LockedCapsuleList({ capsules }: { capsules: any[] }) {
     }, [capsules]); // Re-run effect when capsules data changes
     return (
         <div className="capsule-list-container">
-            <div className="capsule-list-title flex justify-end items-center">
-                <AddCapsuleBtn />
-            </div>
             <ul className="capsule-ul">
                 {updatedCapsules.length > 0 ? (
                     updatedCapsules.map(({ id, name, createdDate, countdown }: any) => (
