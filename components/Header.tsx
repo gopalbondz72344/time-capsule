@@ -15,13 +15,13 @@ const Header = ({ session }: { session: Session | null }) => {
         <header className="mt-10 px-8 py-3  flex justify-between items-center gap-5">
             {/* Logo */}
             <Link href="/" className="flex">
-                <Image src="/logo.png" alt="logo" width={200} height={50} priority />
+                <Image src="/logo.png" alt="logo" width={200} height={50} priority loading="lazy" />
             </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex gap-10">
                 {session ? (
-                    <Link href="/my-profile">
+                    <Link href="/my-profile" className="text-white">
                         <Avatar>
                             <AvatarFallback className="bg-blue-500 text-white font-bold">
                                 {getInitials(session?.user?.name || "IN")}
@@ -46,7 +46,7 @@ const Header = ({ session }: { session: Session | null }) => {
                 className="md:hidden  focus:outline-none transition-all duration-300"
                 onClick={() => setIsOpen(true)}
             >
-                <Image width={30} height={30} src="/assets/menu.svg" alt="menu"/>
+                <Image width={30} height={30} src="/assets/menu.svg" alt="menu" loading="lazy"/>
             </button>
 
             {/* Sidebar Navigation (Mobile) */}
@@ -60,13 +60,13 @@ const Header = ({ session }: { session: Session | null }) => {
                     className="absolute top-4 right-4 text-white"
                     onClick={() => setIsOpen(false)}
                 >
-                    <Image width={30} height={30} src="/assets/x.svg" alt="x"/>
+                    <Image width={30} height={30} src="/assets/x.svg" alt="x" loading="lazy"/>
                 </button>
 
                 {/* Sidebar Links */}
                 <nav className="flex flex-col items-start mt-16 pl-6 space-y-4">
                     {session ? (
-                        <Link href="/my-profile"  onClick={() => setIsOpen(false)}>
+                        <Link href="/my-profile" className="text-white"  onClick={() => setIsOpen(false)}>
                             <Avatar>
                                 <AvatarFallback className="bg-blue-500 w-[200px] h-[200px] text-white font-bold">
                                     {getInitials(session?.user?.name || "IN")}
