@@ -105,22 +105,6 @@ const CreateCapsuleForm = <T extends FieldValues>({
                                                 className="form-input"
                                             />
                                         )}
-                                        {field.name === "EndDate" ? (
-                                            <Input
-                                                required
-                                                type="date"
-                                                min={new Date(Date.now() + 86400000).toISOString().split("T")[0]} // Set min to tomorrow
-                                                {...field}
-                                                className="form-input"
-                                            />
-                                        ) : (
-                                            <Input
-                                                required
-                                                type={CAPSULE_FIELD_TYPES[field.name as keyof typeof CAPSULE_FIELD_TYPES]}
-                                                {...field}
-                                                className="form-input"
-                                            />
-                                        )}
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

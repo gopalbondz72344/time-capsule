@@ -26,7 +26,7 @@ export default function UnLockedCapsuleList({ capsules }: { capsules: any[] }) {
         <div className="capsule-list-container px-4 sm:px-6 lg:px-8 mt-8">
             <ul className="capsule-ul grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {Capsules.length > 0 ? (
-                    Capsules.map(({id, name, createdDate, countdown}: any) => (
+                    Capsules.map(({id, name, createdDate, status}: any) => (
                         <li key={id} className="capsule-list-item bg-dark-500 p-4 rounded-lg shadow-lg">
                             <Link href={`/capsules?id=${id}`} className="flex flex-col items-center sm:flex-row gap-4">
                                 <div className="rounded-md bg-dark-600 p-2">
@@ -37,9 +37,9 @@ export default function UnLockedCapsuleList({ capsules }: { capsules: any[] }) {
                                     <p className="text-sm text-gray-400">
                                         Created <span className="font-medium text-blue-300">{createdDate}</span>
                                     </p>
-                                    <p className="text-sm text-gray-400">
-                                        Capsule is Unlocked! <span className="font-medium text-yellow-300">
-                                    {countdown || 'Available Now'}
+                                    <p className="text-sm text-white font-bold">
+                                        Capsule is Unlocked <span className="font-medium text-yellow-300">
+                                    {status === 'UNLOCKED' ? 'Available Now!' : ''}
                                 </span>
                                     </p>
                                 </div>
