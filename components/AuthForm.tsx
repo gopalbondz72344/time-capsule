@@ -22,7 +22,6 @@ import { Input } from "@/components/ui/input";
 import { ZodType } from "zod";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
-
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
@@ -45,9 +44,11 @@ const AuthForm = <T extends FieldValues>({
         resolver: zodResolver(schema),
         defaultValues: defaultValues as DefaultValues<T>,
     });
+
     useEffect(() => {
         form.reset(defaultValues as DefaultValues<T>);
     },[]);
+
     const handleSubmit: SubmitHandler<T> = async (data) => {
         const result = await onSubmit(data);
 
