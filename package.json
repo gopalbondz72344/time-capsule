@@ -34,7 +34,7 @@
     "imagekitio-react": "^4.2.0",
     "ldrs": "^1.0.2",
     "lucide-react": "^0.474.0",
-    "next": "15.1.6",
+    "next": "15.1.9",
     "next-auth": "^5.0.0-beta.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
